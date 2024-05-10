@@ -18,8 +18,24 @@ public class WorkoutController {
 		return "";
 	}
 	
-	@RequestMapping(value = "/weekelyPlan", method = RequestMethod.GET)
-	public String weekelyPlan(Model model) {
+	@RequestMapping(value = "/saveWeekelyPlan", method = RequestMethod.GET)
+	public String saveWeekelyPlan(Model model) {
+		
+		model.addAttribute("");
+		
+		return "";
+	}
+	
+	@RequestMapping(value = "/loadWeekelyPlan", method = RequestMethod.GET)
+	public String loadWeekelyPlan(Model model) {
+		
+		model.addAttribute("");
+		
+		return "";
+	}
+	
+	@RequestMapping(value = "/recommendWorkout", method = RequestMethod.GET)
+	public String recommendWorkout(Model model) {
 		
 		model.addAttribute("");
 		
