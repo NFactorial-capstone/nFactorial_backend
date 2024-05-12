@@ -4,9 +4,9 @@ public class FoodVo {
 
 	String foodName;
 	int kcal;
-	int carbo;
-	int protein;
-	int fat;
+	float protein;
+	float fat;
+	float carbs;
 	
 	public String getFoodName() {
 		return foodName;
@@ -20,24 +20,26 @@ public class FoodVo {
 	public void setKcal(int kcal) {
 		this.kcal = kcal;
 	}
-	public int getCarbo() {
-		return carbo;
+	public float getCarbs() {
+		return carbs;
 	}
-	public void setCarbo(int carbo) {
-		this.carbo = carbo;
+	public void setCarbs(float carbs) {
+		this.carbs = carbs;
 	}
-	public int getProtein() {
+	public float getProtein() {
 		return protein;
 	}
-	public void setProtein(int protein) {
+	public void setProtein(float protein) {
 		this.protein = protein;
 	}
-	public int getFat() {
+	public float getFat() {
 		return fat;
 	}
-	public void setFat(int fat) {
+	public void setFat(float fat) {
 		this.fat = fat;
 	}
+	
+	
 	
 	
 }
