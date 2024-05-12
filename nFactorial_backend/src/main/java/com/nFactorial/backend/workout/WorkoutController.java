@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class WorkoutController {
 
 	
-	@RequestMapping(value = "/searchWorkout", method = RequestMethod.GET)
+	@RequestMapping(value = "workout/search", method = RequestMethod.GET)
 	public String searchWorkout(Model model) {
 		
 		model.addAttribute("");
@@ -18,7 +18,7 @@ public class WorkoutController {
 		return "";
 	}
 	
-	@RequestMapping(value = "/saveWeekelyPlan", method = RequestMethod.GET)
+	@RequestMapping(value = "workout/saveWeekelyPlan", method = RequestMethod.GET)
 	public String saveWeekelyPlan(Model model) {
 		
 		model.addAttribute("");
@@ -26,7 +26,7 @@ public class WorkoutController {
 		return "";
 	}
 	
-	@RequestMapping(value = "/loadWeekelyPlan", method = RequestMethod.GET)
+	@RequestMapping(value = "workout/loadWeekelyPlan", method = RequestMethod.GET)
 	public String loadWeekelyPlan(Model model) {
 		
 		model.addAttribute("");
@@ -34,7 +34,7 @@ public class WorkoutController {
 		return "";
 	}
 	
-	@RequestMapping(value = "/recommendWorkout", method = RequestMethod.GET)
+	@RequestMapping(value = "workout/recommend", method = RequestMethod.GET)
 	public String recommendWorkout(Model model) {
 		
 		model.addAttribute("");
