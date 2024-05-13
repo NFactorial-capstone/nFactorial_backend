@@ -2,11 +2,11 @@ package com.nFactorial.backend.food;
 
 public class FoodVo {
 
-	String foodName;
-	int kcal;
-	float protein;
-	float fat;
-	float carbs;
+	public String foodName;
+	public int kcal;
+	public float protein;
+	public float fat;
+	public float carbs;
 	
 	public String getFoodName() {
 		return foodName;

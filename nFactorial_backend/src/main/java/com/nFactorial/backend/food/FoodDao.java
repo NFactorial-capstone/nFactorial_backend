@@ -36,7 +36,6 @@ public class FoodDao {
 					foodVo.setFat(rs.getFloat("fat"));
 					foodVo.setCarbs(rs.getFloat("carbs"));
 					
-					System.out.println(foodVo.getCarbs());
 					return foodVo;
 				}
 			}, foodName);
