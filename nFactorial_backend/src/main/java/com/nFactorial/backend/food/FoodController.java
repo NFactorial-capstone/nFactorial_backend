@@ -21,7 +21,7 @@ public class FoodController {
 	@RequestMapping(value = "/search", method = RequestMethod.GET, produces = "application/json")
     @ResponseBody
     public List<FoodVo> searchFood(String name) {
-        System.out.println("searchFood up!");
+        System.out.println("searchFood up! " + name);
         
         List<FoodVo> searchedFoods = foodService.searchFood(name);
         return searchedFoods;

@@ -19,5 +19,11 @@
 		<input type="submit" value="검색">
 	</form>
 	
+	<form action = "file/upload" method="post" enctype="multipart/form-data">
+		<label for="file">Choose a photo:</label>
+        <input type="file" id="file" name="file" accept="image/*">
+        <br><br>
+        <input type="submit" value="Upload">
+	</form>
 </body>
 </html>
