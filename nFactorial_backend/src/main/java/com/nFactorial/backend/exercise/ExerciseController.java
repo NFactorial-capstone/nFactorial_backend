@@ -59,4 +59,15 @@ public class ExerciseController {
 		System.out.println("delete 성공");
 		exerciseService.deleteExercisePlan(email, date);
 	}
+	@RequestMapping(value = "/weight", method = RequestMethod.GET)
+	public void registerWeight(String email, String date, ExerciseVo exercisevo) {
+		System.out.println("register weight성공");
+		exerciseService.registerWeight(email, date, exercisevo);
+	}
+	
+	@RequestMapping(value = "/weight/delete", method = RequestMethod.GET)
+	public void deleteWeight(String email, String date) {
+		System.out.println("delete weight 성공");
+		exerciseService.deleteWeight(email, date);
+	}
 }

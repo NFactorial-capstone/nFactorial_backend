@@ -39,4 +39,10 @@ public class ExerciseService {
 	public void deleteExercisePlan(String email, String date) {
 	    exerciseDao.deleteExercisePlan(email, date);
 	}
+	public void registerWeight(String email, String date, ExerciseVo exercisevo) {
+		exerciseDao.registerWeight(email, date, exercisevo);
+	}
+	public void deleteWeight(String email, String date) {
+	    exerciseDao.deleteWeight(email, date);
+	}
 }

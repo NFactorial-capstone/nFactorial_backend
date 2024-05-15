@@ -130,4 +130,24 @@ public class ExerciseDao {
 	        e.printStackTrace();
 	    }
 	}
+	//체중 등록
+	public void registerWeight(String email, String date, ExerciseVo exercisevo) {
+		String sql = "INSERT INTO weight(email, date, weight) VALUES (?, ?, ?);";
+
+	      try {
+	          jdbcTemplate.update(sql, email, date, exercisevo.getWeight());
+
+	      } catch(Exception e) {
+	          e.printStackTrace();
+	      }
+	}
+	//체중 삭제
+	public void deleteWeight(String email, String date) {
+	    String sql = "DELETE FROM weight WHERE email = ? AND date = ?";
+	    try {
+	        jdbcTemplate.update(sql, email, date);
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	}
 }
