@@ -85,5 +85,16 @@ public class ExerciseDao {
 		}
 		return exerciseVos;
 	}
+	//아이디별 계획짜기
+	public void registerExercisePlan(String email, String date, ExerciseVo exercisevo) {
 
+      String sql = "INSERT INTO exerciseplan(email, date, name, muscle) VALUES (?, ?, ?, ?);";
+
+      try {
+          jdbcTemplate.update(sql, email, date, exercisevo.getName(), exercisevo.getMuscle());
+
+      } catch(Exception e) {
+          e.printStackTrace();
+      }
+  }
 }

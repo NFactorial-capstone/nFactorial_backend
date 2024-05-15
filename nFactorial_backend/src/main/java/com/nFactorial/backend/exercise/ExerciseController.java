@@ -45,6 +45,12 @@ public class ExerciseController {
 		List<ExerciseVo> partExercisesRandomJson = exerciseService.partRandomExercise("{복부}"); //part
         return partExercisesRandomJson;
     }
+	
+	@RequestMapping(value = "/register", method = RequestMethod.GET)
+	public void registerExercise(String email, String date, ExerciseVo exercisevo) {
+		System.out.println("성공");
+		exerciseService.registerExercise(email,date,exercisevo);
+	}
 
 
 }

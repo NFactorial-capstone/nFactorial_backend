@@ -25,4 +25,8 @@ public class ExerciseService {
 		 List<ExerciseVo> partExercises = exerciseDao.partRandomExercise(muscle);
 	        return partExercises;
 	    }
+	 
+	 public void registerExercise(String email, String date, ExerciseVo exercisevo) {
+		 exerciseDao.registerExercisePlan(email, date, exercisevo);
+	 }
 }
