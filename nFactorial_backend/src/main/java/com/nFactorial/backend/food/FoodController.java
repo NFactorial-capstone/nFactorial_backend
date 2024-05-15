@@ -23,8 +23,8 @@ public class FoodController {
     public List<FoodVo> searchFood(String name) {
         System.out.println("searchFood up!");
         
-        List<FoodVo> searchedFoodsJson = foodService.searchFood(name);
-        return searchedFoodsJson;
+        List<FoodVo> searchedFoods = foodService.searchFood(name);
+        return searchedFoods;
     }
 	
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
@@ -32,6 +32,14 @@ public class FoodController {
 		System.out.println("registerFoodplan up!");
 		System.out.println("Date: " + date + " ammount: " + ammount + " FoodVo: " + foodvo.getFoodName() + foodvo.getKcal());
 		foodService.registerFoodPlan(email, date, ammount, foodvo);
+	}
+	
+	@RequestMapping(value = "/load", method = RequestMethod.GET)
+	@ResponseBody
+	public List<FoodVo> loadFoodPlan(String email, String date) {
+		List<FoodVo> foodvos = foodService.loadFoodPlan(email, date);
+		
+		return foodvos;
 	}
 	
 }

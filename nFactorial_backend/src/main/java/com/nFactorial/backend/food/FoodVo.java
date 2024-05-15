@@ -1,9 +1,12 @@
 package com.nFactorial.backend.food;
 
-public class FoodVo {
+import com.nFactorial.backend.PlanVo;
+
+public class FoodVo extends PlanVo{
 
 	public String foodName;
 	public int kcal;
+	public int ml_g;
 	public float protein;
 	public float fat;
 	public float carbs;
@@ -19,6 +22,12 @@ public class FoodVo {
 	}
 	public void setKcal(int kcal) {
 		this.kcal = kcal;
+	}
+	public int getMl_g() {
+		return ml_g;
+	}
+	public void setMl_g(int ml_g) {
+		this.ml_g = ml_g;
 	}
 	public float getCarbs() {
 		return carbs;
@@ -38,8 +47,5 @@ public class FoodVo {
 	public void setFat(float fat) {
 		this.fat = fat;
 	}
-	
-	
-	
 	
 }

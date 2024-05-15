@@ -22,4 +22,10 @@ public class FoodService {
 		
 		foodDao.registerFoodPlan(email, date, ammount, foodvo);
 	}
+	
+	public List<FoodVo> loadFoodPlan(String email, String date) {
+		List<FoodVo> foodvos = foodDao.loadFoodPlan(email, date);
+		
+		return foodvos;
+	}
 }
