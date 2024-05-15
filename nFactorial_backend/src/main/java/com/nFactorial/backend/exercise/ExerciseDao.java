@@ -62,7 +62,7 @@ public class ExerciseDao {
 		return exerciseVos;
 	}
 
-	public List<ExerciseVo> partRandomExercise(String muscle) {
+	public List<ExerciseVo> partRandomExercise(String muscle) { // 부위별 랜덤 리스트 출력
 		List<ExerciseVo> exerciseVos = new ArrayList<>();
 		String sql = "SELECT * FROM exercisedata WHERE muscle = ?";
 		try {
