@@ -29,4 +29,10 @@ public class ExerciseService {
 	 public void registerExercise(String email, String date, ExerciseVo exercisevo) {
 		 exerciseDao.registerExercisePlan(email, date, exercisevo);
 	 }
+	 
+	 public List<ExerciseVo> loadExercisePlan(String email, String date) {
+			List<ExerciseVo> exerciseVos = exerciseDao.loadExercisePlan(email, date);
+			
+			return exerciseVos;
+		}
 }

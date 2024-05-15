@@ -48,9 +48,15 @@ public class ExerciseController {
 	
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public void registerExercise(String email, String date, ExerciseVo exercisevo) {
-		System.out.println("성공");
+		System.out.println("register 성공");
 		exerciseService.registerExercise(email,date,exercisevo);
 	}
 
-
+	@RequestMapping(value = "/load", method = RequestMethod.GET)
+	@ResponseBody
+	public List<ExerciseVo> loadFoodPlan(String email, String date) {
+		System.out.println("load 성공");
+		List<ExerciseVo> exerciseVos = exerciseService.loadExercisePlan(email, date);
+		return exerciseVos;
+	}
 }

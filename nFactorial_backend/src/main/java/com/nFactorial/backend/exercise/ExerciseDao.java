@@ -97,4 +97,27 @@ public class ExerciseDao {
           e.printStackTrace();
       }
   }
+	public List<ExerciseVo> loadExercisePlan(String email, String date) {
+		String sql = "Select * from exerciseplan where email=? && date=?";
+		List<ExerciseVo> exerciseVos = new ArrayList<ExerciseVo>();
+		try {
+			exerciseVos = jdbcTemplate.query(sql, new RowMapper<ExerciseVo>() {
+				
+				@Override
+				public ExerciseVo mapRow(ResultSet rs, int rowNum) throws
+				SQLException {
+					ExerciseVo exerciseVo = new ExerciseVo();
+					exerciseVo.setDate(rs.getString("date"));
+					exerciseVo.setName(rs.getString("name"));
+					exerciseVo.setMuscle(rs.getString("muscle"));
+					
+					
+					return exerciseVo;
+				}
+			},email, date);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return exerciseVos;
+	}
 }
