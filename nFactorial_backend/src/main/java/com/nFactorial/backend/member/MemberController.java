@@ -3,6 +3,8 @@ package com.nFactorial.backend.member;
 import java.io.IOException;
 import java.util.HashMap;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +18,7 @@ public class MemberController {
 	MemberService ms;
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String kakaoLogin(@RequestParam(value = "code", required = false) String code) throws Exception {
+	public String kakaoLogin(@RequestParam(value = "code", required = false) String code, HttpSession session) throws Exception {
 		String access_Token = ms.getAccessToken(code);
 		HashMap<String, Object> userInfo = ms.getUserInfo(access_Token);
 		
@@ -29,6 +31,9 @@ public class MemberController {
         memberVo.setName((String) userInfo.get("nickname"));
         memberVo.setEmail((String) userInfo.get("email")); 
         
+        session.setAttribute("email",  userInfo.get("email"));
+        session.setMaxInactiveInterval(60 * 30);
+        System.out.println(session.getAttribute("email"));
         ms.createAccountConfirm(memberVo);
         
         return "member/hi";
