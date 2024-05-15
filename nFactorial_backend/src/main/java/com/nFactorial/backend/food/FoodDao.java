@@ -47,4 +47,16 @@ public class FoodDao {
 		
 		return foodVos;
 	}
+	
+	public void registerFoodPlan(String email, String date, int ammount, FoodVo foodvo) {
+//		(email, date, name, ml_g, kcal, protein, fat, carbs)
+		String sql = "INSERT INTO foodPlan(email, date, name, ml_g, kcal, protein, fat, carbs) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
+		
+		try {
+			jdbcTemplate.queryForInt(sql, email, date, foodvo.getFoodName(), ammount, foodvo.getKcal(), foodvo.getProtein(), foodvo.getFat(), foodvo.getCarbs());
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
 }
