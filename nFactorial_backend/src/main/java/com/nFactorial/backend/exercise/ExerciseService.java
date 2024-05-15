@@ -13,11 +13,16 @@ public class ExerciseService {
 	ExerciseDao exerciseDao;
 	
 	public List<ExerciseVo> searchExercise(String exerciseName) {
-		JSONObject searchedExerciseJson = new JSONObject();
-		JSONObject exerciseJson;
-		int cnt = 1;
-		
 		List<ExerciseVo> searchedExercises = exerciseDao.searchExercise(exerciseName);
 		return searchedExercises;
 	}
+	
+	 public List<ExerciseVo> partExercise(String muscle) {
+		 List<ExerciseVo> partExercises = exerciseDao.partExercise(muscle);
+	        return partExercises;
+	    }
+	 public List<ExerciseVo> partRandomExercise(String muscle) {
+		 List<ExerciseVo> partExercises = exerciseDao.partRandomExercise(muscle);
+	        return partExercises;
+	    }
 }
