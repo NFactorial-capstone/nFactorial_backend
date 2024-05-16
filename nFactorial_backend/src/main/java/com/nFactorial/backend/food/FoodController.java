@@ -42,4 +42,12 @@ public class FoodController {
 		return foodvos;
 	}
 	
+	@RequestMapping(value = "/change", method = RequestMethod.GET)
+	public void changeData(FoodVo foodvo) {
+		System.out.println("changeDataCon!");
+		System.out.println(foodvo.getEmail() + foodvo.getDate() + foodvo.getFoodName());
+		
+		foodService.changeFoodData(foodvo);
+	}
+	
 }

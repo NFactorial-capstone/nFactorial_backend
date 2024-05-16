@@ -28,4 +28,9 @@ public class FoodService {
 		
 		return foodvos;
 	}
+	
+	public void changeFoodData(FoodVo foodvo) {
+		
+		foodDao.changeFoodData(foodvo);
+	}
 }

@@ -86,4 +86,8 @@ public class FoodDao {
 		}
 		return foodvos;
 	}
+	
+	public void changeFoodData(FoodVo foodvo) {
+		String sql = 
+	}
 }
