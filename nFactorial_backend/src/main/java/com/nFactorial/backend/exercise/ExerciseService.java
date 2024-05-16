@@ -45,4 +45,12 @@ public class ExerciseService {
 	public void deleteWeight(String email, String date) {
 	    exerciseDao.deleteWeight(email, date);
 	}
+	
+	public int countFinishedExercises(String email, String date) {
+        return exerciseDao.countFinishedExercises(email, date);
+    }
+	
+	public double calculateFinishedExercisePercentage(String email, String date) {
+        return exerciseDao.calculateFinishedExercisePercentage(email, date);
+    }
 }

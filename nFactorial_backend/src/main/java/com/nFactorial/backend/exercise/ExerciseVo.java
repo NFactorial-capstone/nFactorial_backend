@@ -7,6 +7,27 @@ public class ExerciseVo {
 	public String guidelines;
 	public String date;
 	public float weight;
+	public int level;
+	public int count;
+	public double percent;
+	public double getPercent() {
+		return percent;
+	}
+	public void setPercent(double percent) {
+		this.percent = percent;
+	}
+	public int getCount() {
+		return count;
+	}
+	public void setCount(int count) {
+		this.count = count;
+	}
+	public int getLevel() {
+		return level;
+	}
+	public void setLevel(int level) {
+		this.level = level;
+	}
 	public float getWeight() {
 		return weight;
 	}

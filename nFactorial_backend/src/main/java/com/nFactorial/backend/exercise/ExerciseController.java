@@ -59,15 +59,38 @@ public class ExerciseController {
 		System.out.println("delete 己傍");
 		exerciseService.deleteExercisePlan(email, date);
 	}
+
 	@RequestMapping(value = "/weight", method = RequestMethod.GET)
 	public void registerWeight(String email, String date, ExerciseVo exercisevo) {
 		System.out.println("register weight己傍");
 		exerciseService.registerWeight(email, date, exercisevo);
 	}
-	
+
 	@RequestMapping(value = "/weight/delete", method = RequestMethod.GET)
 	public void deleteWeight(String email, String date) {
 		System.out.println("delete weight 己傍");
 		exerciseService.deleteWeight(email, date);
+	}
+
+	@RequestMapping(value = "/count", method = RequestMethod.GET, produces = "application/json")
+	@ResponseBody
+	public ExerciseVo ExerciseLevel(String email, String date) {
+		System.out.println("ExerciseLevel 己傍");
+		int count = exerciseService.countFinishedExercises(email, date);
+		ExerciseVo exerciseVos = new ExerciseVo();
+		exerciseVos.setCount(count);
+		System.out.println(exerciseVos.getCount());
+		return exerciseVos;
+	}
+	
+	@RequestMapping(value = "/count/percent", method = RequestMethod.GET, produces = "application/json")
+	@ResponseBody
+	public ExerciseVo calculateFinishedExercisePercentage(String email, String date) {
+		System.out.println("calculateFinishedExercisePercentage 己傍");
+		double percent = exerciseService.calculateFinishedExercisePercentage(email, date);
+		ExerciseVo exerciseVos = new ExerciseVo();
+		exerciseVos.setPercent(percent);
+		System.out.println(exerciseVos.getPercent());
+		return exerciseVos;
 	}
 }
