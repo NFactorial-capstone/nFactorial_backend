@@ -1,10 +1,17 @@
 package com.nFactorial.backend.community;
 
 public class CommunityVo {
+	public String email;
 	public String date;
 	public String part;
 	public String title;
 	public String writing;
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
 	public String getDate() {
 		return date;
 	}

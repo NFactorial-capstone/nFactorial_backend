@@ -1,8 +1,17 @@
 package com.nFactorial.backend.community;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
+
+import com.nFactorial.backend.exercise.ExerciseVo;
 
 @Component
 public class CommunityDao {
@@ -31,8 +40,49 @@ public class CommunityDao {
 			}
 	 }
 	 //게시글 전체 불러오기
-	 
+	 public List<CommunityVo> loadWriting(){
+		 List<CommunityVo> communityVos = new ArrayList<>();
+		 String sql = "SELECT * FROM community";
+		 try {
+			 communityVos = jdbcTemplate.query(sql, new RowMapper<CommunityVo>() {
+					@Override
+					public CommunityVo mapRow(ResultSet rs, int rowNum) throws SQLException {
+						CommunityVo communityVo = new CommunityVo();
+						communityVo.setEmail(rs.getString("email"));
+						communityVo.setDate(rs.getString("date"));
+						communityVo.setPart(rs.getString("part"));
+						communityVo.setTitle(rs.getString("title"));
+						communityVo.setWriting(rs.getString("writing"));
+						return communityVo;
+					}
+				});
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return communityVos;
+	 }
 	 //파트별 리스트 불러오기
-	 
+	 public List<CommunityVo> loadByPart(String part){
+		 List<CommunityVo> communityVos = new ArrayList<>();
+		 String sql = "SELECT * FROM community WHERE part = ?";
+		 try {
+			 communityVos = jdbcTemplate.query(sql, new RowMapper<CommunityVo>() {
+					@Override
+					public CommunityVo mapRow(ResultSet rs, int rowNum) throws SQLException {
+						CommunityVo communityVo = new CommunityVo();
+						communityVo.setEmail(rs.getString("email"));
+						communityVo.setDate(rs.getString("date"));
+						communityVo.setPart(rs.getString("part"));
+						communityVo.setTitle(rs.getString("title"));
+						communityVo.setWriting(rs.getString("writing"));
+						return communityVo;
+					}
+				},part);
+		 }catch(Exception e) {
+			 e.printStackTrace();
+		 }
+		 return communityVos;
+	 }
 	
 }
