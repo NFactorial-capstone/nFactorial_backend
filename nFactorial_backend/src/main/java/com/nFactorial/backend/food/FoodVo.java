@@ -1,5 +1,7 @@
 package com.nFactorial.backend.food;
 
+import org.springframework.stereotype.Component;
+
 import com.nFactorial.backend.PlanVo;
 
 public class FoodVo extends PlanVo{

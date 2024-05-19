@@ -1,5 +1,6 @@
 package com.nFactorial.backend.food;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +19,13 @@ public class FoodService {
 		return searchedFoods;
 	}
 	
-	public void registerFoodPlan(String email, String date, int ammount, FoodVo foodvo) {
+	public int registerFoodPlan(FoodVo foodvo) {
 		
-		foodDao.registerFoodPlan(email, date, ammount, foodvo);
+		int result = 0;
+		foodDao.registerFoodPlan(foodvo);
+		
+		
+		return result;
 	}
 	
 	public List<FoodVo> loadFoodPlan(String email, String date) {
@@ -29,8 +34,10 @@ public class FoodService {
 		return foodvos;
 	}
 	
-	public void changeFoodData(FoodVo foodvo) {
+	public int deleteFoodData(FoodVo foodvo) {
 		
-		foodDao.changeFoodData(foodvo);
+		int delResult = foodDao.deleteData(foodvo);
+		
+		return delResult ;
 	}
 }

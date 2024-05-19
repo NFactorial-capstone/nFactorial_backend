@@ -1,11 +1,12 @@
 package com.nFactorial.backend.food;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Controller;
-
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -18,7 +19,7 @@ public class FoodController {
 	FoodService foodService;
 
 	
-	@RequestMapping(value = "/search", method = RequestMethod.GET, produces = "application/json")
+	@RequestMapping(value = "/search", method = RequestMethod.POST, produces = "application/json")
     @ResponseBody
     public List<FoodVo> searchFood(String name) {
         System.out.println("searchFood up! " + name);
@@ -27,14 +28,15 @@ public class FoodController {
         return searchedFoods;
     }
 	
-	@RequestMapping(value = "/register", method = RequestMethod.GET)
-	public void registerFoodPlan(String email, String date, int ammount, FoodVo foodvo) {
-		System.out.println("registerFoodplan up!");
-		System.out.println("Date: " + date + " ammount: " + ammount + " FoodVo: " + foodvo.getFoodName() + foodvo.getKcal());
-		foodService.registerFoodPlan(email, date, ammount, foodvo);
+	@RequestMapping(value = "/register", method = RequestMethod.POST)
+	public void registerFoodPlan(FoodVo foodvo) {
+		System.out.println("registerFoodplan up! " +  foodvo.toString());
+		
+		System.out.println("Date: " + foodvo.getDate() + " ammount: " + foodvo.getMl_g() + " FoodVo: " + foodvo.getFoodName() + foodvo.getKcal());
+		foodService.registerFoodPlan(foodvo);
 	}
 	
-	@RequestMapping(value = "/load", method = RequestMethod.GET)
+	@RequestMapping(value = "/load", method = RequestMethod.POST)
 	@ResponseBody
 	public List<FoodVo> loadFoodPlan(String email, String date) {
 		List<FoodVo> foodvos = foodService.loadFoodPlan(email, date);
@@ -42,12 +44,13 @@ public class FoodController {
 		return foodvos;
 	}
 	
-	@RequestMapping(value = "/change", method = RequestMethod.GET)
-	public void changeData(FoodVo foodvo) {
+	@RequestMapping(value = "/delete", method = RequestMethod.POST)
+	public void deleteData(FoodVo foodvo) {
 		System.out.println("changeDataCon!");
 		System.out.println(foodvo.getEmail() + foodvo.getDate() + foodvo.getFoodName());
 		
-		foodService.changeFoodData(foodvo);
+		int result = foodService.deleteFoodData(foodvo);
+		
 	}
 	
 }

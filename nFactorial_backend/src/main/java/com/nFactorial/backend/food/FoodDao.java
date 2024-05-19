@@ -48,15 +48,16 @@ public class FoodDao {
 		return foodVos;
 	}
 	
-	public void registerFoodPlan(String email, String date, int ammount, FoodVo foodvo) {
+	public int registerFoodPlan(FoodVo foodvo) {
 //		(email, date, name, ml_g, kcal, protein, fat, carbs)
 		String sql = "INSERT INTO foodPlan(email, date, name, ml_g, kcal, protein, fat, carbs) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
 		
 		try {
-			jdbcTemplate.update(sql, email, date, foodvo.getFoodName(), ammount, foodvo.getKcal(), foodvo.getProtein(), foodvo.getFat(), foodvo.getCarbs());
-			
+			jdbcTemplate.update(sql, foodvo.getEmail(), foodvo.getDate(), foodvo.getFoodName(), foodvo.getMl_g(), foodvo.getKcal(), foodvo.getProtein(), foodvo.getFat(), foodvo.getCarbs());
+			return 1;
 		} catch(Exception e) {
 			e.printStackTrace();
+			return 0;
 		}
 	}
 	
@@ -70,6 +71,7 @@ public class FoodDao {
 				public FoodVo mapRow(ResultSet rs, int rowNum) throws
 				SQLException {
 					FoodVo foodVo = new FoodVo();
+					foodVo.setEmail(rs.getString("email"));
 					foodVo.setDate(rs.getString("date"));
 					foodVo.setFoodName(rs.getString("name"));
 					foodVo.setKcal(rs.getInt("kcal"));
@@ -87,7 +89,15 @@ public class FoodDao {
 		return foodvos;
 	}
 	
-	public void changeFoodData(FoodVo foodvo) {
-		String sql = 
+	public int deleteData(FoodVo foodvo) {
+		String sql = "DELETE FROM foodplan WHERE email = ? AND date = ? AND name = ?";
+		
+		try {
+			jdbcTemplate.update(sql, foodvo.getEmail(), foodvo.getDate(), foodvo.getFoodName());
+			return 1;
+		} catch(Exception e) {
+			e.printStackTrace();
+			return 0;
+		}
 	}
 }
