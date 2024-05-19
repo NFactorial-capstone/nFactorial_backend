@@ -23,6 +23,10 @@
 	
 	<context:component-scan base-package="com.nFactorial.backend" />
 	
+	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!-- 최대 업로드 파일 크기 설정 -->
+        <beans:property name="maxUploadSize" value="10485760"/> <!-- 10MB -->
+    </beans:bean>
 	
 	
 </beans:beans>

@@ -28,15 +28,15 @@ public class ImageUploadController {
 
     private static final String FLASK_SERVER_URL = "http://localhost:5000/detect_objects";
 
-    @RequestMapping(value = "/upload", method = RequestMethod.POST)
-    public void uploadImage(MultipartHttpServletRequest mhsr) throws IOException {
+    @RequestMapping(value = "/uploadfile", method = RequestMethod.POST)
+    public void uploadImage(@RequestParam("img") MultipartFile mhsr) throws IOException {
     	System.out.println("uploadImage up!");
        
-    	MultipartFile image = mhsr.getFile("image");
+    	byte[] bytes = mhsr.getBytes();
         
-    	System.out.println(image);
+    	System.out.println("image");
             // 파일을 Base64로 인코딩
-            byte[] bytes = image.getBytes();
+//            byte[] bytes = image.getBytes();
             String base64Image = Base64.getEncoder().encodeToString(bytes);
 
             // Flask 서버로 이미지 전송
@@ -44,8 +44,10 @@ public class ImageUploadController {
             headers.setContentType(MediaType.APPLICATION_JSON);
             
             Map<String, String> payload = new HashMap<>();
-            payload.put("filename", image.getOriginalFilename());
+            payload.put("filename", mhsr.getOriginalFilename());
             payload.put("image", base64Image);
+            
+            System.out.println(mhsr.getOriginalFilename());
 
             HttpEntity<Map<String, String>> requestEntity = new HttpEntity<>(payload, headers);
             
