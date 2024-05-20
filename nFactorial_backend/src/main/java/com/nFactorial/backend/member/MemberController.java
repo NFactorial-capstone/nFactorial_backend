@@ -1,6 +1,5 @@
 package com.nFactorial.backend.member;
 
-import java.io.IOException;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
@@ -21,18 +20,17 @@ public class MemberController {
 	public String kakaoLogin(@RequestParam(value = "code", required = false) String code, HttpSession session) throws Exception {
 		String access_Token = ms.getAccessToken(code);
 		HashMap<String, Object> userInfo = ms.getUserInfo(access_Token);
-		
-		System.out.println("###access_Token#### : " + access_Token);
+
 		System.out.println("###nickname#### : " + userInfo.get("nickname"));
 		System.out.println("###email#### : " + userInfo.get("email"));
 		
 		MemberVo memberVo = new MemberVo();
-		
         memberVo.setName((String) userInfo.get("nickname"));
         memberVo.setEmail((String) userInfo.get("email")); 
         
         session.setAttribute("email",  userInfo.get("email"));
         session.setMaxInactiveInterval(60 * 30);
+        
         System.out.println(session.getAttribute("email"));
         ms.createAccountConfirm(memberVo);
         

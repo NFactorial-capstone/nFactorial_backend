@@ -15,29 +15,29 @@ public class CommunityController {
 	@Autowired
 	CommunityService communityService;
 	
-	@RequestMapping(value = "/register", method = RequestMethod.GET)
+	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public void registerWriting(String email, String date, CommunityVo communityVo) {
 		System.out.println("register 성공");
 		communityService.registerWriting(email, date, communityVo);
 	}
-	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+	@RequestMapping(value = "/delete", method = RequestMethod.POST)
 	public void deleteWriting(String email, String date, String title) {
 		System.out.println("delete 성공");
 		communityService.deleteWriting(email, date, title);
 	}
 	
-	@RequestMapping(value = "/load", method = RequestMethod.GET)
+	@RequestMapping(value = "/load", method = RequestMethod.POST)
 	@ResponseBody
 	public List<CommunityVo> loadWriting(){
 		System.out.println("load 성공");
 		List<CommunityVo> writings = communityService.loadWriting();
 		return writings;
 	}
-	@RequestMapping(value = "/load/part", method = RequestMethod.GET)
+	@RequestMapping(value = "/load/part", method = RequestMethod.POST)
 	@ResponseBody
 	public List<CommunityVo> loadByPart(String part){
 		System.out.println("loadByPart 성공");
-		List<CommunityVo> writings = communityService.loadByPart("2");
+		List<CommunityVo> writings = communityService.loadByPart("2");//part예시
 		return writings;
 	}
 }
