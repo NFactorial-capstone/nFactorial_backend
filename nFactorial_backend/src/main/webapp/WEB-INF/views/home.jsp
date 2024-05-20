@@ -69,7 +69,7 @@ a {
 <body>
 <div class="wrap">
    <div class="title">로그인</div>
-     <a class="kakao" href="https://kauth.kakao.com/oauth/authorize?client_id=4b014e54e818307875e7f719754a5313&redirect_uri=http://localhost:8080/backend/login&response_type=code">       
+     <a class="kakao" href="https://kauth.kakao.com/oauth/authorize?client_id=4b014e54e818307875e7f719754a5313&redirect_uri=http://52.68.188.192:8080/backend/login&response_type=code">       
       	<div class="kakao_i"></div>
       	<div class="kakao_txt">카카오톡으로 간편로그인 </div>
    	</a>
