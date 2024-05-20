@@ -2,8 +2,11 @@ package com.nFactorial.backend.member;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,4 +38,23 @@ public class MemberDao {
         }
         return result;
     }
+    public List<MemberVo> loadMember(String email) {
+		List<MemberVo> memberVos = new ArrayList<MemberVo>();
+		String sql = "SELECT * FROM tbl_admin_member WHERE email = ?";
+		try {
+			memberVos = jdbcTemplate.query(sql, new RowMapper<MemberVo>() {
+				@Override
+				public MemberVo mapRow(ResultSet rs, int rowNum) throws SQLException {
+					MemberVo memberVo = new MemberVo();
+					memberVo.setName(rs.getString("name"));
+					memberVo.setEmail(rs.getString("email"));
+					return memberVo;
+				}
+			}, email);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return memberVos;
+	}
 }
