@@ -19,7 +19,8 @@ public class MemberController {
 	MemberService ms;
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String kakaoLogin(@RequestParam(value = "code", required = false) String code, HttpSession session) throws Exception {
+	@ResponseBody
+	public MemberVo kakaoLogin(@RequestParam(value = "code", required = false) String code, HttpSession session) throws Exception {
 		String access_Token = ms.getAccessToken(code);
 		HashMap<String, Object> userInfo = ms.getUserInfo(access_Token);
 
@@ -36,7 +37,7 @@ public class MemberController {
         System.out.println(session.getAttribute("email"));
         ms.createAccountConfirm(memberVo);
         
-        return "member/hi";
+        return memberVo;
 	}
 	@RequestMapping(value = "/login/load", method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
