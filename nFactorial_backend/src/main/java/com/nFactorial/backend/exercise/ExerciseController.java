@@ -20,7 +20,7 @@ public class ExerciseController {
 	public List<ExerciseVo> searchFood(String name) {
 		System.out.println("여기까지는 성공!");
 
-		List<ExerciseVo> searchedExercisesJson = exerciseService.searchExercise("덤벨"); // name
+		List<ExerciseVo> searchedExercisesJson = exerciseService.searchExercise(name); // name
 		return searchedExercisesJson;
 	}
 
@@ -28,7 +28,7 @@ public class ExerciseController {
 	@ResponseBody
 	public List<ExerciseVo> getExercisesByPart(String muscle) {
 		System.out.println("part 성공");
-		List<ExerciseVo> partExercisesJson = exerciseService.partExercise("{복부}"); // part
+		List<ExerciseVo> partExercisesJson = exerciseService.partExercise(muscle); // part
 		return partExercisesJson;
 	}
 
@@ -36,7 +36,7 @@ public class ExerciseController {
 	@ResponseBody
 	public List<ExerciseVo> getExercisesPartByRandom(String muscle) {
 		System.out.println("random 성공");
-		List<ExerciseVo> partExercisesRandomJson = exerciseService.partRandomExercise("{복부}"); // part
+		List<ExerciseVo> partExercisesRandomJson = exerciseService.partRandomExercise(muscle); // part
 		return partExercisesRandomJson;
 	}
 

@@ -37,7 +37,7 @@ public class CommunityController {
 	@ResponseBody
 	public List<CommunityVo> loadByPart(String part){
 		System.out.println("loadByPart 성공");
-		List<CommunityVo> writings = communityService.loadByPart("2");//part예시
+		List<CommunityVo> writings = communityService.loadByPart(part);//part예시
 		return writings;
 	}
 }
