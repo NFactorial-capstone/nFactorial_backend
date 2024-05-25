@@ -31,7 +31,7 @@ public class FoodDao {
 					FoodVo foodVo = new FoodVo();
 					
 					foodVo.setFoodName(rs.getString("name"));
-					foodVo.setKcal(rs.getInt("ml_g"));
+					foodVo.setKcal(rs.getInt("kcal"));
 					foodVo.setProtein(rs.getFloat("protein"));
 					foodVo.setFat(rs.getFloat("fat"));
 					foodVo.setCarbs(rs.getFloat("carbs"));

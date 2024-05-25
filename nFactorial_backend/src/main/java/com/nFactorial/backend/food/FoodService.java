@@ -21,6 +21,17 @@ public class FoodService {
 	public int registerFoodPlan(FoodVo foodvo) {
 		
 		int result = 0;
+		int foodAmmount = foodvo.getMl_g()/100;
+		
+		List<FoodVo> foodVos;
+		
+		foodVos = foodDao.searchFood(foodvo.getFoodName());
+		
+		foodvo.setKcal(foodVos.get(0).getKcal() * foodAmmount);
+		foodvo.setProtein(foodVos.get(0).getProtein() * foodAmmount);
+		foodvo.setFat(foodVos.get(0).getFat() * foodAmmount);
+		foodvo.setCarbs(foodVos.get(0).getCarbs() * foodAmmount);
+		
 		foodDao.registerFoodPlan(foodvo);
 		
 		
