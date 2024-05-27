@@ -74,5 +74,13 @@ a {
       	<div class="kakao_txt">카카오톡으로 간편로그인 </div>
    	</a>
 </div>
+
+<form action="${pageContext.request.contextPath}/uploadfile" method="POST" enctype="multipart/form-data">
+	이미지: <input type="file" id="img" name="img" accept="image/*"></input>
+	<input type="submit"></input>
+</form>
+<form action="${pageContext.request.contextPath}/uploadtest" method="get">
+	<input type="submit"></input>
+</form>
 </body>
 </html>
