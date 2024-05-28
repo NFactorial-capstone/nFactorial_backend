@@ -47,7 +47,7 @@ public class MemberService {
 			sb.append("grant_type=authorization_code");
 
 			sb.append("&client_id=4b014e54e818307875e7f719754a5313"); // 본인이 발급받은 key
-			sb.append("&redirect_uri=http://byStander.iptime.org:8080/backend/login"); // 본인이 설정한 주소
+			sb.append("&redirect_uri=http://52.68.188.192:8080/backend/login"); // 본인이 설정한 주소
 
 			sb.append("&code=" + authorize_code);
 			bw.write(sb.toString());
