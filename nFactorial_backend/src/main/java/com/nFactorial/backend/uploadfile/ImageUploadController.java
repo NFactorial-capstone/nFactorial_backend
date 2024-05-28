@@ -3,12 +3,15 @@ package com.nFactorial.backend.uploadfile;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJacksonHttpMessageConverter;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
@@ -24,6 +27,7 @@ public class ImageUploadController {
     private static final String FLASK_SERVER_URL = "http://localhost:5000/detect_objects";
 
     @RequestMapping(value = "/uploadfile", method = RequestMethod.POST)
+    @ResponseBody
     public void uploadImage(@RequestParam("img") MultipartFile mhsr) throws IOException {
     	System.out.println("uploadImage up!");
        
@@ -52,11 +56,17 @@ public class ImageUploadController {
             messageConverters.add(new MappingJacksonHttpMessageConverter());
             restTemplate.setMessageConverters(messageConverters);
 
-            restTemplate.postForEntity(FLASK_SERVER_URL, requestEntity, Integer.class);
-
+//            restTemplate.postForEntity(FLASK_SERVER_URL, requestEntity, String.class);
+            try {
+                restTemplate.postForEntity(FLASK_SERVER_URL, requestEntity, Integer.class);
+                System.out.println("Request sent successfully.");
+            } catch (RestClientException e) {
+                System.out.println("Error sending request: " + e.getMessage());
+            }
+            System.out.println("response");
             System.out.println("done!");
         
-        
+//            return machine;
         
     }
     
