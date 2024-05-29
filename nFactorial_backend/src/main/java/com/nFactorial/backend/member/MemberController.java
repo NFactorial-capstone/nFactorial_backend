@@ -18,32 +18,54 @@ public class MemberController {
 	@Autowired
 	MemberService ms;
 	
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	MemberVo membervo = new MemberVo();
+//	@RequestMapping(value = "/login", method = RequestMethod.GET)
+//	public void kakaoLogin(@RequestParam(value = "code", required = false) String code, HttpSession session) throws Exception {
+//		String access_Token = ms.getAccessToken(code);
+//		HashMap<String, Object> userInfo = ms.getUserInfo(access_Token);
+//
+//		System.out.println("###nickname#### : " + userInfo.get("nickname"));
+//		System.out.println("###email#### : " + userInfo.get("email"));
+//		
+//		MemberVo memberVo = new MemberVo();
+//        memberVo.setName((String) userInfo.get("nickname"));
+//        memberVo.setEmail((String) userInfo.get("email")); 
+//        
+//        session.setAttribute("userinfo",  memberVo);
+//        
+//        session.setMaxInactiveInterval(60 * 30);
+//        
+//        ms.createAccountConfirm(memberVo);
+//        
+//	}
+	@RequestMapping(value = "/member/load", method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
-	public MemberVo kakaoLogin(@RequestParam(value = "code", required = false) String code, HttpSession session) throws Exception {
-		String access_Token = ms.getAccessToken(code);
-		HashMap<String, Object> userInfo = ms.getUserInfo(access_Token);
-
-		System.out.println("###nickname#### : " + userInfo.get("nickname"));
-		System.out.println("###email#### : " + userInfo.get("email"));
-		
-		MemberVo memberVo = new MemberVo();
-        memberVo.setName((String) userInfo.get("nickname"));
-        memberVo.setEmail((String) userInfo.get("email")); 
-        
-        session.setAttribute("email",  userInfo.get("email"));
-        session.setMaxInactiveInterval(60 * 30);
-        
-        System.out.println(session.getAttribute("email"));
-        ms.createAccountConfirm(memberVo);
-        
-        return memberVo;
-	}
-	@RequestMapping(value = "/login/load", method = RequestMethod.GET, produces = "application/json")
-	@ResponseBody
-	public List<MemberVo> loadMember(String email) {
+	public MemberVo loadMember(@RequestParam("sessionId") String sessionId, HttpSession session) {
 		System.out.println("load ¼º°ø");
-		List<MemberVo> memberVo = ms.loadMember(email);
-		return memberVo;
+		membervo = (MemberVo) session.getAttribute("member");
+		return membervo;
+	}
+	
+	@RequestMapping(value = "member/login", method = RequestMethod.POST)
+	@ResponseBody
+	public String login(MemberVo membervo) {
+		int result = ms.loginCheck(membervo);
+		if(result == 1) {
+			return "pass";
+		} else {
+			return "fail";
+		}
+	}
+	
+	@RequestMapping(value = "/member/register", method = RequestMethod.POST) 
+	@ResponseBody
+	public String register(MemberVo memberVo) {
+		int result = ms.createAccountConfirm(memberVo);
+		if(result == 1)
+			return "Pass";
+		else if(result == 0)
+			return "Fail";
+		else
+			return "Account already exist";
 	}
 }

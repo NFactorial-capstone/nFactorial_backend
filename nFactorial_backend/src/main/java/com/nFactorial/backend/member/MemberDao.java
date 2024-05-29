@@ -14,20 +14,24 @@ import java.util.List;
 public class MemberDao {
     @Autowired
     JdbcTemplate jdbcTemplate;
+    int hashedPassword;
 
-    public boolean isAdminMember(String email) {
-        String sql = "SELECT COUNT(*) FROM tbl_admin_member WHERE email = ?";
-        int result = jdbcTemplate.queryForObject(sql, Integer.class, email);
+    public boolean isAdminMember(MemberVo memberVo) {
+        String sql = "SELECT COUNT(*) FROM tbl_admin_member WHERE email = ? && password = ?";
+        hashedPassword = memberVo.getPassword().hashCode();
+        int result = jdbcTemplate.queryForObject(sql, Integer.class, memberVo.getEmail(), hashedPassword);
         return result > 0;
     }
 
     public int insertAdminAccount(MemberVo memberVo) {
         List<Object> args = new ArrayList<Object>();
 
-        String sql = "INSERT INTO tbl_admin_member VALUES(?, ?)";
+        String sql = "INSERT INTO tbl_admin_member VALUES(?, ?, ?)";
 
         args.add(memberVo.getName());
         args.add(memberVo.getEmail());
+        hashedPassword = memberVo.getPassword().hashCode();
+        args.add(hashedPassword);
 
         int result = -1;
 
@@ -38,6 +42,7 @@ public class MemberDao {
         }
         return result;
     }
+    
     public List<MemberVo> loadMember(String email) {
 		List<MemberVo> memberVos = new ArrayList<MemberVo>();
 		String sql = "SELECT * FROM tbl_admin_member WHERE email = ?";

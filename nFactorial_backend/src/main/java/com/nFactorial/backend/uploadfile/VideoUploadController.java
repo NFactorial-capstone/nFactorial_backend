@@ -24,7 +24,7 @@ public class VideoUploadController {
 	
 	
 
-    @RequestMapping(value = "/upload", method = RequestMethod.POST)
+    @RequestMapping(value = "/uploadVideo", method = RequestMethod.POST)
     public void handleVideoUpload(@RequestParam("file") MultipartFile file) throws IOException {
         String flaskServerUrl = "http://localhost:5000/upload"; // Flask ¼­¹ö URL
 
