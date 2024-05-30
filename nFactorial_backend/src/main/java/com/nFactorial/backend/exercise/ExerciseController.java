@@ -42,9 +42,13 @@ public class ExerciseController {
 	}
 
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public void registerExercise(String email, ExerciseVo exercisevo) {
+	@ResponseBody
+	public String registerExercise(String email, ExerciseVo exercisevo) {
+		String result = "";
 		System.out.println("register 己傍");
-		exerciseService.registerExercise(email, exercisevo);
+		result = exerciseService.registerExercise(email, exercisevo);
+		
+		return result;
 	}
 
 	@RequestMapping(value = "/load", method = RequestMethod.POST, produces = "application/json")
@@ -56,21 +60,30 @@ public class ExerciseController {
 	}
 
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
-	public void deleteExercisePlan(String email, String date) {
+	@ResponseBody
+	public String deleteExercisePlan(String email, String date) {
+		String result = "";
 		System.out.println("delete 己傍");
-		exerciseService.deleteExercisePlan(email, date);
+		result = exerciseService.deleteExercisePlan(email, date);
+		return result;
 	}
 
 	@RequestMapping(value = "/weight", method = RequestMethod.POST)
-	public void registerWeight(String email, ExerciseVo exercisevo) {
+	@ResponseBody
+	public String registerWeight(String email, ExerciseVo exercisevo) {
+		String result = "";
 		System.out.println("register weight己傍");
-		exerciseService.registerWeight(email, exercisevo);
+		result = exerciseService.registerWeight(email, exercisevo);
+		return result;
 	}
 
 	@RequestMapping(value = "/weight/delete", method = RequestMethod.POST)
-	public void deleteWeight(String email, String date) {
+	@ResponseBody
+	public String deleteWeight(String email, String date) {
+		String result = "";
 		System.out.println("delete weight 己傍");
-		exerciseService.deleteWeight(email, date);
+		result = exerciseService.deleteWeight(email, date);
+		return result;
 	}
 	
 	@RequestMapping(value = "/weight/load", method = RequestMethod.POST)

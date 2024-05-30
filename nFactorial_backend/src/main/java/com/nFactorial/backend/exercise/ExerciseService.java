@@ -27,8 +27,11 @@ public class ExerciseService {
 		return partExercises;
 	}
 
-	public void registerExercise(String email, ExerciseVo exercisevo) {
-		exerciseDao.registerExercisePlan(email, exercisevo);
+	public String registerExercise(String email, ExerciseVo exercisevo) {
+		String result ="";
+		result = exerciseDao.registerExercisePlan(email, exercisevo);
+		
+		return result;
 	}
 
 	public List<ExerciseVo> loadExercisePlan(String email, String date) {
@@ -37,14 +40,20 @@ public class ExerciseService {
 		return exerciseVos;
 	}
 	
-	public void deleteExercisePlan(String email, String date) {
-	    exerciseDao.deleteExercisePlan(email, date);
+	public String deleteExercisePlan(String email, String date) {
+		String result = "";
+	    result = exerciseDao.deleteExercisePlan(email, date);
+	    return result;
 	}
-	public void registerWeight(String email, ExerciseVo exercisevo) {
-		exerciseDao.registerWeight(email, exercisevo);
+	public String registerWeight(String email, ExerciseVo exercisevo) {
+		String result = "";
+		result = exerciseDao.registerWeight(email, exercisevo);
+		return result;
 	}
-	public void deleteWeight(String email, String date) {
-	    exerciseDao.deleteWeight(email, date);
+	public String deleteWeight(String email, String date) {
+		String result = "";
+		result = exerciseDao.deleteWeight(email, date);
+		return result;
 	}
 	public List<ExerciseVo> loadWeight(String email, String date) {
 		List<ExerciseVo> exercisevo = new ArrayList<ExerciseVo>();

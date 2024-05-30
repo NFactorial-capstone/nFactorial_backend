@@ -87,15 +87,16 @@ public class ExerciseDao {
 	}
 
 	// 아이디별 계획짜기(DB에 데이터 넣기)
-	public void registerExercisePlan(String email, ExerciseVo exercisevo) {
+	public String registerExercisePlan(String email, ExerciseVo exercisevo) {
 
 		String sql = "INSERT INTO exerciseplan(email, date, name, muscle) VALUES (?, ?, ?, ?);";
 
 		try {
 			jdbcTemplate.update(sql, email, exercisevo.getDate(), exercisevo.getName(), exercisevo.getMuscle());
-
+			return "Success";
 		} catch (Exception e) {
 			e.printStackTrace();
+			return "Fail";
 		}
 	}
 
@@ -123,34 +124,40 @@ public class ExerciseDao {
 	}
 
 	// 해당 날짜 계획 삭제
-	public void deleteExercisePlan(String email, String date) {
+	public String deleteExercisePlan(String email, String date) {
 		String sql = "DELETE FROM exerciseplan WHERE email = ? AND date = ?";
 		try {
 			jdbcTemplate.update(sql, email, date);
+			return "Success";
 		} catch (Exception e) {
 			e.printStackTrace();
+			return "Fail";
 		}
 	}
 
 	// 체중 등록
-	public void registerWeight(String email, ExerciseVo exercisevo) {
+	public String registerWeight(String email, ExerciseVo exercisevo) {
 		String sql = "INSERT INTO weight(email, date, weight) VALUES (?, ?, ?);";
 
 		try {
 			jdbcTemplate.update(sql, email, exercisevo.getDate(), exercisevo.getWeight());
+			return "Success";
 
 		} catch (Exception e) {
 			e.printStackTrace();
+			return "Fail";
 		}
 	}
 
 	// 체중 삭제
-	public void deleteWeight(String email, String date) {
+	public String deleteWeight(String email, String date) {
 		String sql = "DELETE FROM weight WHERE email = ? AND date = ?";
 		try {
 			jdbcTemplate.update(sql, email, date);
+			return "Success";
 		} catch (Exception e) {
 			e.printStackTrace();
+			return "Fail";
 		}
 	}
 	
