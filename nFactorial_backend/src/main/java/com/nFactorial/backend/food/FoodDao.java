@@ -48,16 +48,16 @@ public class FoodDao {
 		return foodVos;
 	}
 	
-	public int registerFoodPlan(FoodVo foodvo) {
+	public String registerFoodPlan(FoodVo foodvo) {
 //		(email, date, name, ml_g, kcal, protein, fat, carbs)
 		String sql = "INSERT INTO foodPlan(email, date, name, ml_g, kcal, protein, fat, carbs) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
 		
 		try {
 			jdbcTemplate.update(sql, foodvo.getEmail(), foodvo.getDate(), foodvo.getFoodName(), foodvo.getMl_g(), foodvo.getKcal(), foodvo.getProtein(), foodvo.getFat(), foodvo.getCarbs());
-			return 1;
+			return "Success";
 		} catch(Exception e) {
 			e.printStackTrace();
-			return 0;
+			return "Fail";
 		}
 	}
 	
@@ -89,15 +89,15 @@ public class FoodDao {
 		return foodvos;
 	}
 	
-	public int deleteData(FoodVo foodvo) {
+	public String deleteData(FoodVo foodvo) {
 		String sql = "DELETE FROM foodplan WHERE email = ? AND date = ? AND name = ?";
 		
 		try {
 			jdbcTemplate.update(sql, foodvo.getEmail(), foodvo.getDate(), foodvo.getFoodName());
-			return 1;
+			return "Success";
 		} catch(Exception e) {
 			e.printStackTrace();
-			return 0;
+			return "Fail";
 		}
 	}
 }

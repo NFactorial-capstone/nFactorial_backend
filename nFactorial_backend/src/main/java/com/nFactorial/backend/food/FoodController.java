@@ -27,11 +27,15 @@ public class FoodController {
     }
 	
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public void registerFoodPlan(FoodVo foodvo) {
+	@ResponseBody
+	public String registerFoodPlan(FoodVo foodvo) {
+		String result = "";
+		
 		System.out.println("registerFoodplan up! " +  foodvo.toString());
 		
 		System.out.println("Date: " + foodvo.getDate() + " ammount: " + foodvo.getMl_g() + " FoodVo: " + foodvo.getFoodName() + foodvo.getKcal());
-		foodService.registerFoodPlan(foodvo);
+		result = foodService.registerFoodPlan(foodvo);
+		return result;
 	}
 	
 	@RequestMapping(value = "/load", method = RequestMethod.POST)
@@ -43,12 +47,14 @@ public class FoodController {
 	}
 	
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
-	public void deleteData(FoodVo foodvo) {
+	@ResponseBody
+	public String deleteData(FoodVo foodvo) {
+		String result = "";
 		System.out.println("changeDataCon!");
 		System.out.println(foodvo.getEmail() + foodvo.getDate() + foodvo.getFoodName());
 		
-		foodService.deleteFoodData(foodvo);
-		
+		result = foodService.deleteFoodData(foodvo);
+		return result;
 	}
 	
 }

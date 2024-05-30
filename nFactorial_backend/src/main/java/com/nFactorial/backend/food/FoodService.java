@@ -18,9 +18,9 @@ public class FoodService {
 		return searchedFoods;
 	}
 	
-	public int registerFoodPlan(FoodVo foodvo) {
+	public String registerFoodPlan(FoodVo foodvo) {
 		
-		int result = 0;
+		String result = "";
 		int foodAmmount = foodvo.getMl_g()/100;
 		
 		List<FoodVo> foodVos;
@@ -32,7 +32,7 @@ public class FoodService {
 		foodvo.setFat(foodVos.get(0).getFat() * foodAmmount);
 		foodvo.setCarbs(foodVos.get(0).getCarbs() * foodAmmount);
 		
-		foodDao.registerFoodPlan(foodvo);
+		result = foodDao.registerFoodPlan(foodvo);
 		
 		
 		return result;
@@ -44,10 +44,10 @@ public class FoodService {
 		return foodvos;
 	}
 	
-	public int deleteFoodData(FoodVo foodvo) {
+	public String deleteFoodData(FoodVo foodvo) {
+		String result = "";
+		result = foodDao.deleteData(foodvo);
 		
-		int delResult = foodDao.deleteData(foodvo);
-		
-		return delResult ;
+		return result ;
 	}
 }
