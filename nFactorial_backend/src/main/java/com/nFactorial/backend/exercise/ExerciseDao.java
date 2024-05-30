@@ -87,12 +87,12 @@ public class ExerciseDao {
 	}
 
 	// 아이디별 계획짜기(DB에 데이터 넣기)
-	public void registerExercisePlan(String email, String date, ExerciseVo exercisevo) {
+	public void registerExercisePlan(String email, ExerciseVo exercisevo) {
 
 		String sql = "INSERT INTO exerciseplan(email, date, name, muscle) VALUES (?, ?, ?, ?);";
 
 		try {
-			jdbcTemplate.update(sql, email, date, exercisevo.getName(), exercisevo.getMuscle());
+			jdbcTemplate.update(sql, email, exercisevo.getDate(), exercisevo.getName(), exercisevo.getMuscle());
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -133,11 +133,11 @@ public class ExerciseDao {
 	}
 
 	// 체중 등록
-	public void registerWeight(String email, String date, ExerciseVo exercisevo) {
+	public void registerWeight(String email, ExerciseVo exercisevo) {
 		String sql = "INSERT INTO weight(email, date, weight) VALUES (?, ?, ?);";
 
 		try {
-			jdbcTemplate.update(sql, email, date, exercisevo.getWeight());
+			jdbcTemplate.update(sql, email, exercisevo.getDate(), exercisevo.getWeight());
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -151,6 +151,28 @@ public class ExerciseDao {
 			jdbcTemplate.update(sql, email, date);
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+	}
+	
+	public List<ExerciseVo> loadWeight(String email, String date) {
+		String sql = "SELECT * FROM weight WHERE email = ? && date = ?";
+		List<ExerciseVo> exercisevos = new ArrayList<ExerciseVo>();
+		try {
+			exercisevos = jdbcTemplate.query(sql, new RowMapper<ExerciseVo>() {
+
+				@Override
+				public ExerciseVo mapRow(ResultSet rs, int rowNum) throws SQLException {
+					ExerciseVo exerciseVo = new ExerciseVo();
+					exerciseVo.setDate(rs.getString("date"));
+					exerciseVo.setWeight(rs.getFloat("weight"));
+
+					return exerciseVo;
+				}
+			}, email, date);
+			return exercisevos;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
 		}
 	}
 

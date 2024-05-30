@@ -10,8 +10,8 @@ public class CommunityService {
 	@Autowired
 	CommunityDao communityDao;
 	
-	public void registerWriting(String email, String date, CommunityVo communityVo) {
-		communityDao.registerWriting(email, date, communityVo);
+	public void registerWriting(CommunityVo communityVo) {
+		communityDao.registerWriting(communityVo);
 	}
 	
 	public void deleteWriting(String email, String date, String title) {

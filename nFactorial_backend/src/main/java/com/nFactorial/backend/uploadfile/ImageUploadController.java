@@ -1,5 +1,6 @@
 package com.nFactorial.backend.uploadfile;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -12,23 +13,32 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.nFactorial.backend.exercise.ExerciseVo;
+
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Controller
 public class ImageUploadController {
 
-    private static final String FLASK_SERVER_URL = "http://localhost:5000/detect_objects";
+	@Autowired
+	ImageDao imageDao;
+	
+    private static final String FLASK_SERVER_URL = "http://byStander.iptime.org:5000/detect_objects";
 
     @RequestMapping(value = "/uploadfile", method = RequestMethod.POST)
     @ResponseBody
-    public String uploadImage(@RequestParam("img") MultipartFile mhsr) throws IOException {
+    public Object uploadImage(@RequestParam("img") MultipartFile mhsr) throws IOException {
     	System.out.println("uploadImage up!");
        
     	byte[] bytes = mhsr.getBytes();
-        
+    	List<ExerciseVo> exerciseVos = new ArrayList<ExerciseVo>();
+    	
     	System.out.println("image");
             // 파일을 Base64로 인코딩
 //            byte[] bytes = image.getBytes();
@@ -59,7 +69,9 @@ public class ImageUploadController {
             	ResponseEntity<String> response = restTemplate.postForEntity(FLASK_SERVER_URL, requestEntity, String.class);
                 System.out.println("Request sent successfully.");
                 System.out.println(response.getBody());
-                return response.getBody();
+                if(response.getBody().equals("Seated_Cable_Rows_images"))
+                	exerciseVos = imageDao.searchExercise("시티드 케이블 로우");
+                return exerciseVos;
             } catch (RestClientException e) {
                 System.out.println("Error sending request: " + e.getMessage());
                 return "1";

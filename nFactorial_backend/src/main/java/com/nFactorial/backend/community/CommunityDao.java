@@ -19,10 +19,10 @@ public class CommunityDao {
 	 JdbcTemplate jdbcTemplate;
 	 
 	 //글 등록하기
-	 public void registerWriting(String email, String date, CommunityVo communityVo) {
+	 public void registerWriting(CommunityVo communityVo) {
 		 String sql = "INSERT INTO community(email, date, part, title, writing) VALUES (?, ?, ?, ?, ?);";
 		 try {
-				jdbcTemplate.update(sql, email, date, communityVo.getPart(), communityVo.getTitle(), communityVo.getWriting());
+				jdbcTemplate.update(sql, communityVo.getEmail(), communityVo.getDate(), communityVo.getPart(), communityVo.getTitle(), communityVo.getWriting());
 
 			} catch (Exception e) {
 				e.printStackTrace();

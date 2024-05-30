@@ -51,9 +51,9 @@ public class MemberController {
 	public String login(MemberVo membervo) {
 		int result = ms.loginCheck(membervo);
 		if(result == 1) {
-			return "pass";
+			return "Pass";
 		} else {
-			return "fail";
+			return "Fail";
 		}
 	}
 	

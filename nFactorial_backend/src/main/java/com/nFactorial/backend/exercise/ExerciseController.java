@@ -1,5 +1,6 @@
 package com.nFactorial.backend.exercise;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,9 +42,9 @@ public class ExerciseController {
 	}
 
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public void registerExercise(String email, String date, ExerciseVo exercisevo) {
+	public void registerExercise(String email, ExerciseVo exercisevo) {
 		System.out.println("register 己傍");
-		exerciseService.registerExercise(email, date, exercisevo);
+		exerciseService.registerExercise(email, exercisevo);
 	}
 
 	@RequestMapping(value = "/load", method = RequestMethod.POST, produces = "application/json")
@@ -61,15 +62,23 @@ public class ExerciseController {
 	}
 
 	@RequestMapping(value = "/weight", method = RequestMethod.POST)
-	public void registerWeight(String email, String date, ExerciseVo exercisevo) {
+	public void registerWeight(String email, ExerciseVo exercisevo) {
 		System.out.println("register weight己傍");
-		exerciseService.registerWeight(email, date, exercisevo);
+		exerciseService.registerWeight(email, exercisevo);
 	}
 
 	@RequestMapping(value = "/weight/delete", method = RequestMethod.POST)
 	public void deleteWeight(String email, String date) {
 		System.out.println("delete weight 己傍");
 		exerciseService.deleteWeight(email, date);
+	}
+	
+	@RequestMapping(value = "/weight/load", method = RequestMethod.POST)
+	public List<ExerciseVo> loadWeight(String email, String date) {
+		System.out.println("load weight 己傍");
+		List<ExerciseVo> exercisevos = new ArrayList<ExerciseVo>();
+		exercisevos = exerciseService.loadWeight(email, date);
+		return exercisevos;
 	}
 
 	@RequestMapping(value = "/count", method = RequestMethod.POST, produces = "application/json")

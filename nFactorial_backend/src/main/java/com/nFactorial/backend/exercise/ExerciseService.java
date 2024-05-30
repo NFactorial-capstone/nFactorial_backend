@@ -1,5 +1,6 @@
 package com.nFactorial.backend.exercise;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +27,8 @@ public class ExerciseService {
 		return partExercises;
 	}
 
-	public void registerExercise(String email, String date, ExerciseVo exercisevo) {
-		exerciseDao.registerExercisePlan(email, date, exercisevo);
+	public void registerExercise(String email, ExerciseVo exercisevo) {
+		exerciseDao.registerExercisePlan(email, exercisevo);
 	}
 
 	public List<ExerciseVo> loadExercisePlan(String email, String date) {
@@ -39,11 +40,16 @@ public class ExerciseService {
 	public void deleteExercisePlan(String email, String date) {
 	    exerciseDao.deleteExercisePlan(email, date);
 	}
-	public void registerWeight(String email, String date, ExerciseVo exercisevo) {
-		exerciseDao.registerWeight(email, date, exercisevo);
+	public void registerWeight(String email, ExerciseVo exercisevo) {
+		exerciseDao.registerWeight(email, exercisevo);
 	}
 	public void deleteWeight(String email, String date) {
 	    exerciseDao.deleteWeight(email, date);
+	}
+	public List<ExerciseVo> loadWeight(String email, String date) {
+		List<ExerciseVo> exercisevo = new ArrayList<ExerciseVo>();
+		exercisevo = exerciseDao.loadWeight(email, date);
+		return exercisevo;
 	}
 	
 	public int countFinishedExercises(String email, String date) {

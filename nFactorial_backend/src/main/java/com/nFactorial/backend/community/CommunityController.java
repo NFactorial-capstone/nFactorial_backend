@@ -16,9 +16,9 @@ public class CommunityController {
 	CommunityService communityService;
 	
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public void registerWriting(String email, String date, CommunityVo communityVo) {
+	public void registerWriting(CommunityVo communityVo) {
 		System.out.println("register ¼º°ø");
-		communityService.registerWriting(email, date, communityVo);
+		communityService.registerWriting(communityVo);
 	}
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
 	public void deleteWriting(String email, String date, String title) {
