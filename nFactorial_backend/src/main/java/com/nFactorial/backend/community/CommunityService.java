@@ -10,12 +10,16 @@ public class CommunityService {
 	@Autowired
 	CommunityDao communityDao;
 	
-	public void registerWriting(CommunityVo communityVo) {
-		communityDao.registerWriting(communityVo);
+	public String registerWriting(CommunityVo communityVo) {
+		String result = "";
+		result = communityDao.registerWriting(communityVo);
+		return result;
 	}
 	
-	public void deleteWriting(String email, String date, String title) {
-		communityDao.deleteWriting(email, date, title);
+	public String deleteWriting(String email, String date, String title) {
+		String result = "";
+		result = communityDao.deleteWriting(email, date, title);
+		return result;
 	}
 	public List<CommunityVo> loadWriting(){
 		List<CommunityVo> communityVos = communityDao.loadWriting();

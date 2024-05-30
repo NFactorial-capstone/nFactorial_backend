@@ -19,24 +19,27 @@ public class CommunityDao {
 	 JdbcTemplate jdbcTemplate;
 	 
 	 //글 등록하기
-	 public void registerWriting(CommunityVo communityVo) {
+	 public String registerWriting(CommunityVo communityVo) {
 		 String sql = "INSERT INTO community(email, date, part, title, writing) VALUES (?, ?, ?, ?, ?);";
 		 try {
 				jdbcTemplate.update(sql, communityVo.getEmail(), communityVo.getDate(), communityVo.getPart(), communityVo.getTitle(), communityVo.getWriting());
-
+				return "Success";
 			} catch (Exception e) {
 				e.printStackTrace();
+				return "Fail";
 			}
 	 }
 
 	 
 	 //글 삭제하기
-	 public void deleteWriting(String email, String date, String title) {
+	 public String deleteWriting(String email, String date, String title) {
 		 String sql = "DELETE FROM community WHERE email = ? AND date = ? AND title = ?";
 		 try {
 				jdbcTemplate.update(sql, email, date, title);
+				return "Success";
 			} catch (Exception e) {
 				e.printStackTrace();
+				return "Fail";
 			}
 	 }
 	 //게시글 전체 불러오기

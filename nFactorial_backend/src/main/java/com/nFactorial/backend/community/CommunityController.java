@@ -16,14 +16,20 @@ public class CommunityController {
 	CommunityService communityService;
 	
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public void registerWriting(CommunityVo communityVo) {
+	@ResponseBody
+	public String registerWriting(CommunityVo communityVo) {
+		String result = "";
 		System.out.println("register 성공");
-		communityService.registerWriting(communityVo);
+		result = communityService.registerWriting(communityVo);
+		return result;
 	}
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
-	public void deleteWriting(String email, String date, String title) {
+	@ResponseBody
+	public String deleteWriting(String email, String date, String title) {
+		String result = "";
 		System.out.println("delete 성공");
-		communityService.deleteWriting(email, date, title);
+		result = communityService.deleteWriting(email, date, title);
+		return result;
 	}
 	
 	@RequestMapping(value = "/load", method = RequestMethod.POST)
